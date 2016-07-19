@@ -49,7 +49,7 @@ class WeixinInterface:
                 r=urllib2.urlopen(r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='+post)
                 fy=json.loads(r)
                 trans=fy['translation']
-                return self.render.reply_text(fromUser,toUser,int(time.time()),trans)
+                return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
         elif msgType == 'image':
             pass
         else:
