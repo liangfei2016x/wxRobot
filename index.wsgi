@@ -16,7 +16,7 @@ render = web.template.render(templates_root)
 
 class Hello:
     def GET(self):
-    return render.hello("你好")
+    return "Hello World"
 
 app = web.application(urls,globals()).wsgifunc()
 application = sae.create_wsgi_app(app)
