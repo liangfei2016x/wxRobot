@@ -43,7 +43,7 @@ class WeixinInterface:
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
 
-        if msgType == 'text':
+"""        if msgType == 'text':
             if content[0:2]==u"翻译":
                 post=str(content[2:0])
                 r=urllib2.urlopen(r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='+post)
@@ -52,5 +52,5 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
         elif msgType == 'image':
             pass
-        else:
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
+        else:"""
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
