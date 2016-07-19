@@ -14,12 +14,12 @@ class WeixinInterface:
         self.render = web.template.render(self.templates_root)
 
     def GET(self):
-        data = web.iput()
+        data = web.input()
         signature = data.signature
         timestamp = data.timestamp
         nonce = data.nonce
         echostr = data.echostr
-        token = "liangfei"
+        token = "testone"
         list=[token,timestamp,nonce]
         list.sort()
         sha1 = hashlib.sha1()
