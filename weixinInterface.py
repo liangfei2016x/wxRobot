@@ -41,7 +41,7 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        if msgType=='Text':
+        if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
