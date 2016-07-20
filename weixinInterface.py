@@ -44,10 +44,9 @@ class WeixinInterface:
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
             if content[0:2]== u"翻译":
-                post = str(content[2:0])
-                text = post.encode('utf-8')
+                post = content[2:0]
                 baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
-                url=baseurl+text
+                url=baseurl+post
                 r=urllib2.urlopen(url)
                 fy=json.loads(r.read())
                 trans=fy['translation']
