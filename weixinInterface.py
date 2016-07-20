@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 import hashlib
 import web
 import lxml
@@ -44,9 +44,9 @@ class WeixinInterface:
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
             if content[0:2]== u"翻译":
-                post = str(content[2:])
-                #text = post.encode('utf-8')
-                #tx = urllib2.quote(text)
+                post = unicode(content[2:])
+                text = post.encode('utf-8')
+                tx = urllib2.quote(text)
                 baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
                 url = baseurl+post
                 r=urllib2.urlopen(url)
