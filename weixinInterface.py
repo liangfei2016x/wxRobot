@@ -44,23 +44,18 @@ class WeixinInterface:
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
             if content[0:2]== u"翻译":
-                post=str(content[2:0])
-                if type(post).__name__ == "unicode":
-                    post = post.encode('UTF-8')
-                a = youdao(post)
-                return self.render.reply_text(fromUser,toUser,int(time.time()),a)
+                post = unicode(str(content[2:]))
+                text = post.encode('utf-8')
+                tx = urllib2.quote(text)
+                baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
+                url = baseurl+post
+                r=urllib2.urlopen(url)
+                fy=json.loads(r.read())
+                trans=fy['translation']
+                return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
             pass
         else:
             pass
-
-    def youdao(word):
-        tx = urllib2.quote(word)
-        baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
-        url = baseurl+post
-        r=urllib2.urlopen(url)
-        fy=json.loads(r.read())
-        trans=fy['translation']
-        return ' '.join(trans)
