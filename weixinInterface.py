@@ -44,8 +44,8 @@ class WeixinInterface:
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
             if content[0:2]==u"翻译":
-                post = str(content[2:0])
-                r=urllib2.urlopen(r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='+post)
+                #post = str(content[2:0])
+                r=urllib2.urlopen(r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q=good')
                 fy=json.loads(r.read())
                 trans=fy['translation']
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
