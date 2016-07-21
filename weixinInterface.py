@@ -48,7 +48,7 @@ class WeixinInterface:
                 text = post.encode('utf-8')
                 tx = urllib2.quote(text)
                 baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
-                url = baseurl+post
+                url = baseurl+tx
                 r=urllib2.urlopen(url)
                 fy=json.loads(r.read())
                 trans=fy['translation']
