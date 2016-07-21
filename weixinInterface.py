@@ -43,6 +43,7 @@ class WeixinInterface:
         toUser=xml.find("ToUserName").text
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
+            #翻译
             if content[0:2] == u"翻译":
                 post = content[2:]
                 text = post.encode('utf-8')
@@ -53,6 +54,10 @@ class WeixinInterface:
                 fy=json.loads(r.read())
                 trans=fy['translation']
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
+            if content[0:2] == u"天气":
+                baseurl = r'http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day=0'
+                weather = urllib2.urlopen(baseurl).read()
+                return self.render.reply_text(fromUser,toUser,int(time.time()),weather)
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
