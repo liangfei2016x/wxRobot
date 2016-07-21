@@ -57,14 +57,16 @@ class WeixinInterface:
             if content[0:2] == u"天气":
                 a=content[2:0]
                 if a == None:
-                    baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day=0'.format(str(i)) for i in range(0,3)] 
+                    baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day={}'.format(str(i)) for i in range(0,3)] 
                 else:
                     baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % a).format(str(i)) for i in range(0,3)]
+                city=[]
                 for url in baseurl:
                     tq_xml = urllib2.urlopen(url).read()
                     xml = etree.fromstring(tq_xml)
-                    city = xml.find("status1").text
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),city)
+                    cy = xml.find("status1").text
+                    city.append(cy)
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),' '.json(city))
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
