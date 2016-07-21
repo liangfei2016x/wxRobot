@@ -43,7 +43,6 @@ class WeixinInterface:
         toUser=xml.find("ToUserName").text
         if msgType=='text':
             content=xml.find("Content").text#获得用户所输入的内容
-            content=unicode(content,'utf-8')
             if content[0:2] == u"翻译":
                 post = content[2:]
                 text = post.encode('utf-8')
