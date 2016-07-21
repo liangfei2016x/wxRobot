@@ -56,10 +56,10 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
             if content[0:2] == u"天气":
                 a=content[2:]
-                if a == None:
-                    baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day={}'.format(str(i)) for i in range(0,3)] 
-                else:
+                if len(a):
                     baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % a).format(str(i)) for i in range(0,3)]
+                else:
+                    baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day={}'.format(str(i)) for i in range(0,3)] 
                 city=[]
                 for url in baseurl:
                     tq_xml = urllib2.urlopen(url).read()
