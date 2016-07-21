@@ -60,10 +60,11 @@ class WeixinInterface:
                     baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day=0'.format(str(i)) for i in range(0,3)] 
                 else:
                     baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % a).format(str(i)) for i in range(0,3)]
-                tq_xml = urllib2.urlopen(baseurl).read()
-                xml = etree.fromstring(tq_xml)
-                city = xml.find("city").text
-                return self.render.reply_text(fromUser,toUser,int(time.time()),city)
+                for url in baseurl:
+                    tq_xml = urllib2.urlopen(url).read()
+                    xml = etree.fromstring(tq_xml)
+                    city = xml.find("status1").text
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),city)
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
