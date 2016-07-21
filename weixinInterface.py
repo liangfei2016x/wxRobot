@@ -57,8 +57,7 @@ class WeixinInterface:
             if content[0:2] == u"天气":
                 a=content[2:]
                 if len(a):
-                    a=a.encode('utf-8')
-                    text = urllib2.quote(a)
+                    a=a.encode('GB2312')
                     baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % text).format(str(i)) for i in range(0,3)]
                 else:
                     baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day={}'.format(str(i)) for i in range(0,3)]
