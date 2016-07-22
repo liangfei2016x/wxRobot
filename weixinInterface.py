@@ -75,7 +75,7 @@ class WeixinInterface:
 
             elif content[0:2] == u"点歌":
                 musiclist=[
-                [r'http://m10.music.126.net/20160722161010/b10cb9a3f0febe7179005140b25c0b03/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3','Jam',u'妞!快来听']
+                [r'http://m10.music.126.net/20160722164330/7a085c896a32c727b8c91ea628b4844f/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3','Jam',u'妞!快来听']
                 ]
                 music = musiclist[0]
                 musicURL = music[0]
