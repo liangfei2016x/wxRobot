@@ -72,7 +72,8 @@ class WeixinInterface:
                     data = dt+" "+st+" "+tm2+u"°C"+"-"+tm1+u"°C"+"\n"
                     weather.append(data)
                 return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
-            elif content[0:2] == u"点歌"
+
+            elif content[0:2] == u"点歌":
                 musiclist=[
                 [r'http://m10.music.126.net/20160722161010/b10cb9a3f0febe7179005140b25c0b03/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3','Jam',u'妞!快来听']
                 ]
@@ -80,7 +81,7 @@ class WeixinInterface:
                 musicUrl = music[0]
                 musicDes = music[1]
                 musicTitle = music[2]
-                return self.render.reply_music(fromUser,toUser,int(times.time()),musicTitle,musicDes,musicUrl)
+                return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicUrl)
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
