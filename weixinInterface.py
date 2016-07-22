@@ -78,10 +78,10 @@ class WeixinInterface:
                 [r'http://m10.music.126.net/20160722161010/b10cb9a3f0febe7179005140b25c0b03/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3','Jam',u'妞!快来听']
                 ]
                 music = musiclist[0]
-                musicUrl = music[0]
+                musicURL = music[0]
                 musicDes = music[1]
                 musicTitle = music[2]
-                return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicUrl)
+                return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
