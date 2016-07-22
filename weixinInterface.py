@@ -66,7 +66,7 @@ class WeixinInterface:
                     tq_xml = urllib2.urlopen(url).read()
                     xml = etree.fromstring(tq_xml)
                     cy = xml.find("status1").text
-                city.append(cy)
+                    city.append(cy)
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.json(city))
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
