@@ -5,6 +5,7 @@ import lxml
 import time
 import os
 import urllib2,json
+import random
 from lxml import etree
 
 class WeixinInterface:
@@ -74,8 +75,13 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
 
             elif content[0:2] == u"点歌":
-                musiclist=[[r'http://m2.music.126.net/K1SFXCvWf8BO9VEpSvx2ew==/7967061257205150.mp3','Jam',u'妞!快来听'],]
-                music = musiclist[0]
+                musiclist=[
+                            [r'http://m2.music.126.net/K1SFXCvWf8BO9VEpSvx2ew==/7967061257205150.mp3','Jam',u'七月上(妞!快来听)'],
+                            [r'http://m2.music.126.net/D7GY-8m9japXRmzBPlfovA==/3445869444824734.mp3',u'金玟岐',u'小幸运(妞!快来听)'],
+                            [r'http://m2.music.126.net/hDrQ4OGIV1C25vw3H03MLA==/1213860837073174.mp3',u'梁静茹',u'小手拉大手(妞!快来听)'],
+                            [r'http://m2.music.126.net/F8K_9OAgMUuc8qrFeFDPrg==/3308430488137023.mp3',u'回音哥',u'海绵宝宝(妞!快来听)'],
+                            ]
+                music = random.choice(musiclist)
                 musicURL = music[0]
                 musicDes = music[1]
                 musicTitle = music[2]
