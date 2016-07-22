@@ -58,16 +58,20 @@ class WeixinInterface:
                 a=content[2:]
                 if len(a):
                     a=a.encode('GB2312')
-                    baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % text).format(str(i)) for i in range(0,3)]
+                    baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % a).format(str(i)) for i in range(0,3)]
                 else:
                     baseurl = ['http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day={}'.format(str(i)) for i in range(0,3)]
-                city=[]
+                weather=[]
                 for url in baseurl:
                     tq_xml = urllib2.urlopen(url).read()
                     xml = etree.fromstring(tq_xml)
-                    cy = xml.find("status1").text
-                    city.append(cy)
-                return self.render.reply_text(fromUser,toUser,int(time.time()),' '.json(city))
+                    dt = xml.xpath('//Profiles/Weather/savedate_weather')[0].text
+                    st = xml.xpath('//Profiles/Weather/status1')[0].text
+                    tm1 = xml.xpath('//Profiles/Weather/temperature1')[0].text
+                    tm2 = xml.xpath('//Profiles/Weather/temperature2')[0].text
+                    data = dt+" "+st+" "+tm2+u"°C"+"-"+tm1+u"°C"
+                    weather.append(data)
+                return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
             else:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
