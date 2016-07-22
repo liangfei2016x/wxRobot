@@ -1,7 +1,7 @@
 $def with (toUser,fromUser,createTime,musicTitle,musicDes,musicURL)
 <xml>
-<ToUserName><![CDATA[toUser]]></ToUserName>
-<FromUserName><![CDATA[fromUser]]></FromUserName>
+<ToUserName><![CDATA[$toUser]]></ToUserName>
+<FromUserName><![CDATA[$fromUser]]></FromUserName>
 <CreateTime>$createTime</CreateTime>
 <MsgType><![CDATA[music]]></MsgType>
 <Music>
@@ -9,6 +9,6 @@ $def with (toUser,fromUser,createTime,musicTitle,musicDes,musicURL)
 <Description><![CDATA[$musicDes]]></Description>
 <MusicUrl><![CDATA[$musicURL]]></MusicUrl>
 <HQMusicUrl><![CDATA[$musicURL]]></HQMusicUrl>
-<ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>
 </Music>
+<FuncFlag>0</FuncFlag>
 </xml>
