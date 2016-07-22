@@ -69,7 +69,7 @@ class WeixinInterface:
                     st = xml.xpath('//Profiles/Weather/status1')[0].text
                     tm1 = xml.xpath('//Profiles/Weather/temperature1')[0].text
                     tm2 = xml.xpath('//Profiles/Weather/temperature2')[0].text
-                    data = dt+" "+st+" "+tm2+u"°C"+"-"+tm1+u"°C"
+                    data = dt+" "+st+" "+tm2+u"°C"+"-"+tm1+u"°C"+"\n"
                     weather.append(data)
                 return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
             else:
