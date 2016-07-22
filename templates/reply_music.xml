@@ -6,8 +6,8 @@ $def with (toUser,fromUser,createTime,musicTitle,musicDes,musicURL)
 <MsgType><![CDATA[music]]></MsgType>
 <Music>
 <Title><![CDATA[$musicTitle]]></Title>
-<Description><![CDATA[$musicTitle]]></Description>
-<MusicUrl><![CDATA[$musicDes]]></MusicUrl>
+<Description><![CDATA[$musicDes]]></Description>
+<MusicUrl><![CDATA[$musicURL]]></MusicUrl>
 <HQMusicUrl><![CDATA[$musicURL]]></HQMusicUrl>
 <ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>
 </Music>
