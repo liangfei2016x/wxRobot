@@ -77,6 +77,7 @@ class WeixinInterface:
                 musiclist=[
                 [r'http://m10.music.126.net/20160722164330/7a085c896a32c727b8c91ea628b4844f/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3','Jam',u'妞!快来听']
                 ]
+                #http://m10.music.126.net/20160722164330/7a085c896a32c727b8c91ea628b4844f/ymusic/3b42/666c/658d/dd9fd710bf78b291bc63861a335588f6.mp3
                 music = musiclist[0]
                 musicURL = music[0]
                 musicDes = music[1]
