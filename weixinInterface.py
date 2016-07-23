@@ -55,6 +55,7 @@ class WeixinInterface:
                 fy=json.loads(r.read())
                 trans=fy['translation']
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
+            #天气
             elif content[0:2] == u"天气":
                 a=(content[2:]).strip()
                 if len(a):
@@ -73,7 +74,7 @@ class WeixinInterface:
                     data = dt+" "+st+" "+tm2+u"°C"+"-"+tm1+u"°C"+"\n"
                     weather.append(data)
                 return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
-
+            #点歌
             elif content[0:2] == u"点歌":
                 musiclist=[
                             [r'http://m2.music.126.net/K1SFXCvWf8BO9VEpSvx2ew==/7967061257205150.mp3','Jam',u'七月上(妞!快来听)'],
@@ -87,8 +88,21 @@ class WeixinInterface:
                 musicTitle = music[2]
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             else:
+                res=tuling(content)
+                content=res['text']
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         elif msgType =='image':
             pass
         else:
             pass
+
+    def tuling(msg):
+        url = r'http://www.tuling123.com/openapi/api'
+        APIKEY = '5f27804952aaf87cad2da3ba134114be'
+        data = {
+                'key':APIKEY,
+                'info':msg.encode('utf-8')
+        }
+        r=requests.post(url,data=data)
+        response = json.loads(r.text)
+        return response
