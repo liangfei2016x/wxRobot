@@ -90,20 +90,20 @@ class WeixinInterface:
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             else:
                 res=tuling(content)
-                content=res['text']
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
+                rep_content=res['text']
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+rep_content)
         elif msgType =='image':
             pass
         else:
             pass
 
-    def tuling(msg):
-        url = r'http://www.tuling123.com/openapi/api'
-        APIKEY = '5f27804952aaf87cad2da3ba134114be'
-        data = {
-                'key':APIKEY,
-                'info':msg.encode('utf-8')
-        }
-        r=requests.post(url,data=data)
-        response = json.loads(r.text)
-        return response
+def tuling(msg):
+    url = r'http://www.tuling123.com/openapi/api'
+    APIKEY = '5f27804952aaf87cad2da3ba134114be'
+    data = {
+            'key':APIKEY,
+            'info':msg.encode('utf-8'),
+    }
+    r=requests.post(url,data=data)
+    response = json.loads(r.text)
+    return response
