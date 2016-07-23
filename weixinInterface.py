@@ -46,7 +46,7 @@ class WeixinInterface:
             content=xml.find("Content").text#获得用户所输入的内容
             #翻译
             if content[0:2] == u"翻译":
-                post = content[2:]
+                post = (content[2:]).strip()
                 text = post.encode('utf-8')
                 tx = urllib2.quote(text)
                 baseurl=r'http://fanyi.youdao.com/openapi.do?keyfrom=zhilutianshi&key=293831118&type=data&doctype=json&version=1.1&q='
@@ -56,7 +56,7 @@ class WeixinInterface:
                 trans=fy['translation']
                 return self.render.reply_text(fromUser,toUser,int(time.time()),' '.join(trans))
             elif content[0:2] == u"天气":
-                a=content[2:]
+                a=(content[2:]).strip()
                 if len(a):
                     a=a.encode('GB2312')
                     baseurl = [('http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day={}' % a).format(str(i)) for i in range(0,3)]
