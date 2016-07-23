@@ -77,13 +77,15 @@ class WeixinInterface:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),','.join(weather))
             #点歌
             elif content[0:2] == u"点歌":
+                #http://m2.music.126.net/K1SFXCvWf8BO9VEpSvx2ew==/7967061257205150.mp3
                 musiclist=[
-                            [r'http://m2.music.126.net/K1SFXCvWf8BO9VEpSvx2ew==/7967061257205150.mp3','Jam',u'七月上(妞!快来听)'],
+                            [r'http://song.music.response.itmf.cn/ab989028b66345a63b6b4f97d4d98104/57936b04/G050/M09/1C/17/0oYBAFZ6hVGISlxAAAyxVObqJ-cAAAevwA-XP0ADLFs275.m4a','Jam',u'七月上(妞!快来听)'],
                             [r'http://m2.music.126.net/D7GY-8m9japXRmzBPlfovA==/3445869444824734.mp3',u'金玟岐',u'小幸运(妞!快来听)'],
                             [r'http://m2.music.126.net/hDrQ4OGIV1C25vw3H03MLA==/1213860837073174.mp3',u'梁静茹',u'小手拉大手(妞!快来听)'],
                             [r'http://m2.music.126.net/F8K_9OAgMUuc8qrFeFDPrg==/3308430488137023.mp3',u'回音哥',u'海绵宝宝(妞!快来听)'],
                             ]
-                music = random.choice(musiclist)
+                #music = random.choice(musiclist)
+                music=musiclist[0]
                 musicURL = music[0]
                 musicDes = music[1]
                 musicTitle = music[2]
