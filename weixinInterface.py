@@ -90,7 +90,6 @@ class WeixinInterface:
                                 [r'http://m2.music.126.net/F8K_9OAgMUuc8qrFeFDPrg==/3308430488137023.mp3',u'回音哥',u'海绵宝宝(妞!快来听)'],
                                 ]
                 music = random.choice(musiclist)
-                music=musiclist[0]
                 musicURL = music[0]
                 musicDes = music[1]
                 musicTitle = music[2]
