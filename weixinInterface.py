@@ -6,6 +6,7 @@ import time
 import os
 import urllib2,json
 import random
+import requests
 from lxml import etree
 
 class WeixinInterface:
