@@ -120,7 +120,7 @@ def anymusic(s_name):
     headers = {'apikey':key}
     r=requests.get(s_url,headers=headers)
     response=json.loads(r.text)
-    hash_text=response['data']['data'][0]['hash']
+    hash_text=response['data']['data'][2]['hash']
     url = r'http://apis.baidu.com/geekery/music/playinfo?hash=%s' % hash_text
     res=requests.get(url,headers=headers)
     resp=json.loads(res.text)
