@@ -138,15 +138,19 @@ def anymusic(s_name):
     return song_list
 #快递
 def kd100():
-    numb='881443775034378914'
+    headers={
+    'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
+    }
+    numb=r'881443775034378914'
     numb_url=r'http://www.kuaidi100.com/autonumber/autoComNum?text=%s' % numb
-    r=requests.post(numb_url)
+    r=requests.post(numb_url,headers=headers)
     response=json.loads(r.text)
     kd_name=response['auto'][0]['comCode']
     q_url=r'http://www.kuaidi100.com/query?type={0}&postid={1}'.format(kd_name,numb)
-    q_data=requests.get(q_url)
+    q_data=requests.get(q_url,headers=headers)
     data=json.loads(q_data.text)
     msg_data=data['data']
+    string = u''
     for msg in msg_data:
-        string=u''+msg['time']+' '+msg['context']+'\n'
+        string=string+msg['time']+' '+msg['context']+'\n'
     return string
