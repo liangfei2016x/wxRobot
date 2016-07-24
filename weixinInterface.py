@@ -96,21 +96,26 @@ class WeixinInterface:
                 musicTitle = music[2]
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             elif content[0:2] == u"快递":
-                numb = content[2:]
-                headers={
-                        'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
-                        }
-                numb_url=r'http://www.kuaidi100.com/autonumber/autoComNum?text=%s' % numb
-                r=requests.post(numb_url,headers=headers)
-                response=json.loads(r.text)
-                kd_name=response['auto'][0]['comCode']
-                q_url=r'http://www.kuaidi100.com/query?type={0}&postid={1}'.format(kd_name,numb)
-                q_data=requests.get(q_url,headers=headers)
-                data=json.loads(q_data.text)
-                msg_data=data['data']
-                string =u''
-                for msg in msg_data:
-                    string=string+msg['time']+' '+msg['context']+'\n'
+                keyword = content[2:]
+                url = "http://www.kuaidi100.com/autonumber/autoComNum?text="+keyword
+                cj = cookielib.CookieJar()
+                opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+                opener.addheaders = [('User-agent','Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.3.0')]
+                urllib2.install_opener(opener)
+                html = urllib2.urlopen(url).read()
+                jo = json.loads(html)
+                typ = jo["auto"][0]['comCode']
+                if(typ is None):
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"请检查你的定单号！") 
+                urll = "http://www.kuaidi100.com/query?type="+typ+"&postid="+keyword
+                html_end = urllib2.urlopen(urll).read()
+                jo_end = json.loads(html_end)
+                if(jo_end["status"] == "201"):
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"订单号输入有误，请重新输入！") 
+                text = jo_end["data"]
+                string = u""
+                for i in text:
+                    string = string + i["time"] + i["context"] + "\n"
                 return self.render.reply_text(fromUser,toUser,int(time.time()),string)
             else:
                 res=tuling(content)
@@ -147,7 +152,7 @@ def anymusic(s_name):
     fileDes=u'好听你就点个赞吧'
     song_list=[url_name,fileName,fileDes]
     return song_list
-#快递
+#快递 这个用不了。解决不了。
 def kd100(numb):
     headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
@@ -160,7 +165,7 @@ def kd100(numb):
     q_data=requests.get(q_url,headers=headers)
     data=json.loads(q_data.text)
     msg_data=data['data']
-    string =u''
+    string = u''
     for msg in msg_data:
         string=string+msg['time']+' '+msg['context']+'\n'
     return string
