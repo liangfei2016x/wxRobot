@@ -96,9 +96,22 @@ class WeixinInterface:
                 musicTitle = music[2]
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             elif content[0:2] == u"快递":
-                keyword = content[2:]
-                kd_text = kd100(keyword)
-                return self.render.reply_text(fromUser,toUser,int(time.time()),kd_text)
+                numb = content[2:]
+                headers={
+                        'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
+                        }
+                numb_url=r'http://www.kuaidi100.com/autonumber/autoComNum?text=%s' % numb
+                r=requests.post(numb_url,headers=headers)
+                response=json.loads(r.text)
+                kd_name=response['auto'][0]['comCode']
+                q_url=r'http://www.kuaidi100.com/query?type={0}&postid={1}'.format(kd_name,numb)
+                q_data=requests.get(q_url,headers=headers)
+                data=json.loads(q_data.text)
+                msg_data=data['data']
+                string =u''
+                for msg in msg_data:
+                    string=string+msg['time']+' '+msg['context']+'\n'
+                return self.render.reply_text(fromUser,toUser,int(time.time()),string)
             else:
                 res=tuling(content)
                 rep_content=res['text']
@@ -138,7 +151,6 @@ def anymusic(s_name):
 def kd100(numb):
     headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
-    'Cookie':'__gads=ID=1d5b96d4e7ac7a94:T=1469329235:S=ALNI_Ma90nNPAj0TLBVvMu-SSN8wr6c7pQ; kd_history=%5B%7B%22code%22%3A%22yuantong%22%2C%22nu%22%3A%22881443775034378914%22%2C%22time%22%3A%222016-07-24T07%3A06%3A37.919Z%22%2C%22ischeck%22%3A%221%22%7D%5D; toolbox_urls=; Hm_lvt_22ea01af58ba2be0fec7c11b25e88e6c=1469329280; Hm_lpvt_22ea01af58ba2be0fec7c11b25e88e6c=1469353477',
     }
     numb_url=r'http://www.kuaidi100.com/autonumber/autoComNum?text=%s' % numb
     r=requests.post(numb_url,headers=headers)
