@@ -94,7 +94,7 @@ class WeixinInterface:
                 musicDes = music[1]
                 musicTitle = music[2]
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
-            elif content[0:2] == u"快递"：
+            elif content[0:2] == u"快递":
                 a =(content[2:]).strip()
                 if len(a):
                     kd=kd100(a)
