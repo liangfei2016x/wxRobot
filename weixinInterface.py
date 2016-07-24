@@ -152,7 +152,7 @@ def anymusic(s_name):
     fileDes=u'好听你就点个赞吧'
     song_list=[url_name,fileName,fileDes]
     return song_list
-#快递 这个用不了。解决不了。
+#快递
 def kd100(numb):
     headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
