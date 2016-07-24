@@ -150,7 +150,7 @@ def kd100():
     q_data=requests.get(q_url,headers=headers)
     data=json.loads(q_data.text)
     msg_data=data['data']
-    string=u''
+    string=u""
     for msg in msg_data:
         string=string+msg['time']+' '+msg['context']+'\n'
     return string
