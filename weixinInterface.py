@@ -94,6 +94,13 @@ class WeixinInterface:
                 musicDes = music[1]
                 musicTitle = music[2]
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
+            elif content[0:2] == u"快递"：
+                a =(content[2:]).strip()
+                if len(a):
+                    kd=kd100(a)
+                else:
+                    kd=u'亲,请输入订单号'
+                return self.render.reply_text(fromUser,toUser,int(time.time()),kd)
             else:
                 res=tuling(content)
                 rep_content=res['text']
@@ -129,3 +136,20 @@ def anymusic(s_name):
     fileDes=u'好听你就点个赞吧'
     song_list=[url_name,fileName,fileDes]
     return song_list
+#快递
+def kd100(numb):
+    headers={
+    'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
+    }
+    numb_url=r'http://www.kuaidi100.com/autonumber/autoComNum?text=%s' % numb
+    r=requests.post(numb_url,headers=headers)
+    response=json.loads(r.text)
+    kd_name=response['auto'][0]['comCode']
+    q_url=r'http://www.kuaidi100.com/query?type={0}&postid={1}'.format(kd_name,numb)
+    q_data=requests.get(q_url,headers=headers)
+    data=json.loads(q_data.text)
+    msg_data=data['data']
+    string=''
+    for msg in msg_data:
+        string=string+msg['time']+' '+msg['context']+'\n'
+    return string
