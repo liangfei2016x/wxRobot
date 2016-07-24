@@ -7,6 +7,7 @@ import os
 import urllib2,json
 import random
 import requests
+import cookielib
 from lxml import etree
 
 class WeixinInterface:
