@@ -97,26 +97,8 @@ class WeixinInterface:
                 return self.render.reply_music(fromUser,toUser,int(time.time()),musicTitle,musicDes,musicURL)
             elif content[0:2] == u"快递":
                 keyword = content[2:]
-                url = "http://www.kuaidi100.com/autonumber/autoComNum?text="+keyword
-                cj = cookielib.CookieJar()
-                opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-                opener.addheaders = [('User-agent','Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.3.0')]
-                urllib2.install_opener(opener)
-                html = urllib2.urlopen(url).read()
-                jo = json.loads(html)
-                typ = jo["auto"][0]['comCode']
-                if(typ is None):
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"请检查你的定单号！") 
-                urll = "http://www.kuaidi100.com/query?type="+typ+"&postid="+keyword
-                html_end = urllib2.urlopen(urll).read()
-                jo_end = json.loads(html_end)
-                if(jo_end["status"] == "201"):
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"订单号输入有误，请重新输入！") 
-                text = jo_end["data"]
-                string = u""
-                for i in text:
-                    string = string + i["time"] + i["context"] + "\n"
-                return self.render.reply_text(fromUser,toUser,int(time.time()),string)
+                kd_text = kd100(keyword)
+                return self.render.reply_text(fromUser,toUser,int(time.time()),kd_text)
             else:
                 res=tuling(content)
                 rep_content=res['text']
@@ -165,7 +147,7 @@ def kd100(numb):
     q_data=requests.get(q_url,headers=headers)
     data=json.loads(q_data.text)
     msg_data=data['data']
-    string = u''
+    string =u''
     for msg in msg_data:
         string=string+msg['time']+' '+msg['context']+'\n'
     return string
