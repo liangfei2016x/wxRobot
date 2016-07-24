@@ -154,4 +154,4 @@ def kd100():
     string = u''
     for msg in msg_data:
         string=string+msg['time']+' '+msg['context']+'\n'
-    return string
+    return kd_name
