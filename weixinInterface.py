@@ -25,7 +25,7 @@ class WeixinInterface:
         nonce=data.nonce
         echostr=data.echostr
         #自己的token
-        token="liangfei" #这里改写你在微信公众平台里输入的token
+        token="自己的token" #这里改写你在微信公众平台里输入的token
         #字典序排序
         list=[token,timestamp,nonce]
         list.sort()
@@ -128,7 +128,7 @@ class WeixinInterface:
 #图灵
 def tuling(msg):
     url = r'http://www.tuling123.com/openapi/api'
-    APIKEY = '5f27804952aaf87cad2da3ba134114be'
+    APIKEY = '自己的KEY'
     data = {
             'key':APIKEY,
             'info':msg.encode('utf-8'),
@@ -139,7 +139,7 @@ def tuling(msg):
 #点歌
 def anymusic(s_name):
     s_url = r'http://apis.baidu.com/geekery/music/query?s=%s&size=5&page=1' % s_name
-    key = '3b45811f4b67acba8e670d04ff93b08d'
+    key = '自己的KEY'
     headers = {'apikey':key}
     r=requests.get(s_url,headers=headers)
     response=json.loads(r.text)
@@ -152,7 +152,9 @@ def anymusic(s_name):
     fileDes=u'好听你就点个赞吧'
     song_list=[url_name,fileName,fileDes]
     return song_list
-#快递
+
+"""
+#快递 这个用不了呢 郁闷。
 def kd100(numb):
     headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 5.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
@@ -169,3 +171,4 @@ def kd100(numb):
     for msg in msg_data:
         string=string+msg['time']+' '+msg['context']+'\n'
     return string
+"""
