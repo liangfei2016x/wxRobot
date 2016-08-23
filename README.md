@@ -21,5 +21,6 @@ python版本：python2.7
     直接随便输入内容 也会回复你 数据来源于图灵机器人
   
 程序挂在新浪sae上面,可以关注公共号:hit2016 来试玩一下
+
 ![image](https://github.com/liangfei2016x/wxRobot/blob/master/wximg/wx.jpg)
     
